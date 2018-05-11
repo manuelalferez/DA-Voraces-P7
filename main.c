@@ -40,26 +40,32 @@ int factible(int vector[], int n) {
 }
 
 int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
-    int* S = malloc(n * sizeof(int)); //S es el conjunto solución
+    int* S = malloc(n * sizeof (int)); //S es el conjunto solución
     //Inicializamos
     for (int i = 0; i < n; i++) S[i] = 0;
     //Variables
     int tam_S, tam_equipos, x, ciudad_actual;
     ciudad_actual = 0;
-    tam_S=0;
+    tam_S = 0;
     tam_equipos = n;
 
     //Bucle voraz
     while (tam_S != n && tam_equipos != 0) {
         x = seleccion(ciudades, equipos, ciudad_actual, tam_equipos);
         x = equipos[x];
-        eliminar(equipos,x, tam_equipos);
+        eliminar(equipos, x, tam_equipos);
         tam_equipos--;
-        if(factible(S, tam_S)){
-            S[tam_S]=x;
+        if (factible(S, tam_S)) {
+            S[tam_S] = x;
         }
     }
     return S;
+}
+
+int quienGana(int v[], int w[], int pos) {
+    if (w[pos] > v[pos])
+        return 1;
+    else return 0;
 }
 
 /*
@@ -68,6 +74,18 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
  * @param argv Parámetros por líneas de órdenes
  */
 int main(int argc, char** argv) {
+
+    int castillos[] = {5, 8, 1, 4, 2, 7, 14, 2};
+    int ejercitos[] = {6, 1, 4, 7, 12, 4, 5, 9};
+
+    int num = 8;
+
+    int * solucion = algoritmoVoraz(castillos, ejercitos, num);
+
+    for (int i = 0; i < num; i++) {
+        printf("Ciudad: %d vs Ejercito: %d --> WIN: %d\n", castillos[i],
+                solucion[i], quienGana(castillos, solucion, i));
+    }
 
     return (EXIT_SUCCESS);
 }
