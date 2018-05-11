@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#define INFINITO 99999
 
 /**
  * ENUNCIADO DEL PROBLEMA:
@@ -41,6 +43,21 @@ int seleccion2(int ciudades[], int equipos[], int ciudad_actual, int tam) {
     return equipo;
 }
 
+int seleccion3(int ciudades[], int equipos[], int ciudad_actual, int tam) {
+    int equipo = 0; //Equipo a enviar
+    int i = 0;
+    int diferencia = INFINITO;
+    while (i < tam) {
+        if (equipos[i] >= ciudades[ciudad_actual])
+                if ((equipos[i] - ciudades[i]) < diferencia) {
+                    equipo = i;
+                    diferencia= equipos[i] - ciudades[i];
+                }
+        i++;
+    }
+    return equipo;
+}
+
 void eliminar(int v[], int pos, int n) {
     v[pos] = v[n - 1];
 }
@@ -63,7 +80,7 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
 
     //Bucle voraz
     while (tam_S != n && tam_equipos != 0) {
-        pos = seleccion(ciudades, equipos, ciudad_actual, tam_equipos);
+        pos = seleccion3(ciudades, equipos, ciudad_actual, tam_equipos);
         ele = equipos[pos];
         eliminar(equipos, pos, tam_equipos);
         tam_equipos--;
@@ -77,7 +94,7 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
 }
 
 int quienGana(int v[], int w[], int pos) {
-    if (w[pos] > v[pos])
+    if (w[pos] >= v[pos])
         return 1;
     else return 0;
 }
