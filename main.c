@@ -1,6 +1,6 @@
 /* 
  * @file main.c
- * @author: Manuel Alférez Ruiz
+ * @author Manuel Alférez Ruiz
  * @date 11 de mayo de 2018, 10:00
  * @note Problema 7
  */
