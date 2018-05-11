@@ -44,19 +44,21 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
     //Inicializamos
     for (int i = 0; i < n; i++) S[i] = 0;
     //Variables
-    int tam_S, tam_equipos, x, ciudad_actual;
+    int tam_S, tam_equipos, x, ciudad_actual, ele, pos;
     ciudad_actual = 0;
     tam_S = 0;
     tam_equipos = n;
 
     //Bucle voraz
     while (tam_S != n && tam_equipos != 0) {
-        x = seleccion(ciudades, equipos, ciudad_actual, tam_equipos);
-        x = equipos[x];
-        eliminar(equipos, x, tam_equipos);
+        pos = seleccion(ciudades, equipos, ciudad_actual, tam_equipos);
+        ele = equipos[x];
+        eliminar(equipos, pos, tam_equipos);
         tam_equipos--;
-        if (factible(S, tam_S)) {
-            S[tam_S] = x;
+        ciudad_actual++;
+        if (factible(S, n)) {
+            S[tam_S] = ele;
+            tam_S++;
         }
     }
     return S;
