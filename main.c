@@ -29,6 +29,18 @@ int seleccion(int ciudades[], int equipos[], int ciudad_actual, int tam) {
     else return equipo++;
 }
 
+int seleccion2(int ciudades[], int equipos[], int ciudad_actual, int tam) {
+    int equipo = 0; //Equipo a enviar
+    int i = 0;
+    while (i < 5 || i == tam - 1) {
+        if (equipos[i] > ciudades[ciudad_actual])
+            if (equipos[i] > equipos[equipo])
+                equipo = i;
+        i++;
+    }
+    return equipo;
+}
+
 void eliminar(int v[], int pos, int n) {
     v[pos] = v[n - 1];
 }
@@ -44,7 +56,7 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
     //Inicializamos
     for (int i = 0; i < n; i++) S[i] = 0;
     //Variables
-    int tam_S, tam_equipos, x, ciudad_actual, ele, pos;
+    int tam_S, tam_equipos, ciudad_actual, ele, pos;
     ciudad_actual = 0;
     tam_S = 0;
     tam_equipos = n;
@@ -52,7 +64,7 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
     //Bucle voraz
     while (tam_S != n && tam_equipos != 0) {
         pos = seleccion(ciudades, equipos, ciudad_actual, tam_equipos);
-        ele = equipos[x];
+        ele = equipos[pos];
         eliminar(equipos, pos, tam_equipos);
         tam_equipos--;
         ciudad_actual++;
