@@ -84,10 +84,10 @@ int seleccion3(int ciudades[], int equipos[], int ciudad_actual, int tam) {
     int diferencia = INFINITO; //Valor que indicará con que ventaja se gana 
     while (i < tam) {
         if (equipos[i] >= ciudades[ciudad_actual])
-                if ((equipos[i] - ciudades[i]) < diferencia) {
-                    equipo = i;
-                    diferencia= equipos[i] - ciudades[i];
-                }
+            if ((equipos[i] - ciudades[i]) < diferencia) {
+                equipo = i;
+                diferencia = equipos[i] - ciudades[i];
+            }
         i++;
     }
     return equipo;
@@ -130,10 +130,10 @@ int* algoritmoVoraz(int ciudades[], int equipos[], int n) {
     //Inicializamos
     for (int i = 0; i < n; i++) S[i] = 0;
     //Variables
-    int tam_S=0, tam_equipos=n, ele, pos;
+    int tam_S = 0, tam_equipos = n, ele, pos;
     //Bucle voraz
     while (tam_S != n && tam_equipos != 0) {
-        pos = seleccion3(ciudades, equipos, n-tam_equipos, tam_equipos);
+        pos = seleccion3(ciudades, equipos, n - tam_equipos, tam_equipos);
         ele = equipos[pos];
         eliminar(equipos, pos, tam_equipos);
         tam_equipos--;
